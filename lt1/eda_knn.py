@@ -25,25 +25,6 @@ print(data.describe())
 print("\nMissing Values:")
 print(data.isnull().sum())
 
-# Plot correlation heatmap (only for numeric columns)
-numeric_columns = ['Price', 'Rating']  # Only select numeric columns
-plt.figure(figsize=(10, 6))
-sns.heatmap(data[numeric_columns].corr(), annot=True, cmap='coolwarm')
-plt.title("Correlation Heatmap")
-plt.show()
-
-# Plot the distribution of the target variable (adjust if your target is not 'Rating')
-plt.figure(figsize=(6, 4))
-sns.countplot(data['Rating'])  # Replace 'Rating' with your actual target variable if different
-plt.title("Target Variable Distribution")
-plt.show()
-
-# Boxplot for numerical features
-plt.figure(figsize=(10, 6))
-sns.boxplot(data=data[numeric_columns])
-plt.title("Boxplot of Numerical Features")
-plt.show()
-
 # ---------------- K-Nearest Neighbors (KNN) Prediction ---------------- #
 # Preprocess the data: Define features and target variable
 X = data[['Price']]  # Example feature, adjust based on your dataset
@@ -81,6 +62,24 @@ print(classification_report(y_test, y_pred))
 # Accuracy Score
 accuracy = accuracy_score(y_test, y_pred)
 print("\nAccuracy Score:", accuracy)
+
+# Plot correlation heatmap (only for numeric columns)
+numeric_columns = ['Price', 'Rating']  # Only select numeric columns
+
+# Create the first figure for the correlation heatmap
+plt.figure(figsize=(10, 6))
+sns.heatmap(data[numeric_columns].corr(), annot=True, cmap='coolwarm')
+plt.title("Correlation Heatmap")
+plt.show(block=False)  # Show the figure without blocking the code execution
+
+# Create a second figure for the boxplot of numerical features
+plt.figure(figsize=(10, 6))
+sns.boxplot(data=data[numeric_columns])
+plt.title("Boxplot of Numerical Features")
+plt.show()
+
+
+
 
 # ---------------- Insights for Students ---------------- #
 # 1. Discuss feature correlations and important variables based on the heatmap.
